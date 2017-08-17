@@ -1,0 +1,33 @@
+﻿
+This is my small java game project. Many on the game mechanics are still not polished but the game works.
+The goal of this tower defense is to kill all enemies before they reach the end of the dirtway. The player 
+starts each level with set credits for building battle towers.
+
+This game has 8 levels with different map design and waves of enemies.
+
+		<<Enemies>>
+
+Zombies: Weak health and very slow movement
+
+Cars: Moderate health and fast movement
+
+Planes:	Moderate health and very fast movement
+
+Tanks:	Very strong health and slow movement
+
+Flying saucer: Strong health and very fast movement
+
+		
+		<<Towers>>
+
+Gun Turret:Deals weak very fast damage, Range: very short, but continues firing after locking on target
+
+Flak Tower: Deals moderate fast damage, Range: longer then moderate
+
+Frosting Tower: Deals moderate damage with slowing enemy effect, Range: moderate
+
+Corrosive Tower: Deals damage by percentage of enemy Health - best for tough enemies, Range: longer then moderate
+
+Long Missile Tower: Very powerful rockets, Range: the whole map
+
+Note: Towers can only be build on grass terrain (rocks, water and forests are not suitable for structures)
