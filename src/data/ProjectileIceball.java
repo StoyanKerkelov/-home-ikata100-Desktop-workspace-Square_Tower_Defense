@@ -13,7 +13,7 @@ public class ProjectileIceball extends Projectile{
 		if(super.getTarget().isFrosted()){
 		} else {
 			super.getTarget().setFrosted(true);
-			super.getTarget().setSpeed(getTarget().getSpeed() * 0.4f);	//reduce only once speed by 40%
+			super.getTarget().setSpeed(getTarget().getSpeed() * 0.65f);	//reduce only once speed by 40%
 		}
 	}
 }

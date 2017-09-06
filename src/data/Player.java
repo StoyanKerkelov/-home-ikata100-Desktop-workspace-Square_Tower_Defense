@@ -29,10 +29,10 @@ public class Player {
 	public static boolean modifyCash(int amount){
 		if(Credits + amount >= 0){
 			Credits += amount;
-			System.out.println(Credits);
+//			System.out.println(Credits);
 			return true;
 		}
-		System.out.println(Credits);
+//		System.out.println(Credits);
 		return false;
 	}
 	

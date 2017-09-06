@@ -1,13 +1,30 @@
 package helpers;
 
-import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.GL_BLEND;
+import static org.lwjgl.opengl.GL11.GL_MODELVIEW;
+import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_SRC_ALPHA;
+import static org.lwjgl.opengl.GL11.GL_PROJECTION;
+import static org.lwjgl.opengl.GL11.GL_QUADS;
+import static org.lwjgl.opengl.GL11.GL_SRC_ALPHA;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
+import static org.lwjgl.opengl.GL11.glBegin;
+import static org.lwjgl.opengl.GL11.glBlendFunc;
+import static org.lwjgl.opengl.GL11.glEnable;
+import static org.lwjgl.opengl.GL11.glEnd;
+import static org.lwjgl.opengl.GL11.glLoadIdentity;
+import static org.lwjgl.opengl.GL11.glMatrixMode;
+import static org.lwjgl.opengl.GL11.glOrtho;
+import static org.lwjgl.opengl.GL11.glRotatef;
+import static org.lwjgl.opengl.GL11.glTexCoord2f;
+import static org.lwjgl.opengl.GL11.glTranslatef;
+import static org.lwjgl.opengl.GL11.glVertex2f;
 
-import java.io.IOException;
 import java.io.InputStream;
-
+import java.util.HashMap;
+import java.util.Map;
 
 import org.lwjgl.LWJGLException;
-import org.lwjgl.opengl.Display; 
+import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
@@ -17,6 +34,7 @@ public class Artist {
 	//res 1280(+ 192x for menu) x 960 
 	public static final int WIDTH = 1472, HEIGHT = 960;
 	public static final int TILE_SIZE = 64;
+	private static Map<String, Texture> cachedTextures = new HashMap<>();
 
 	public static void BeginSession() {
 		Display.setTitle("Square Tower Defense");
@@ -118,22 +136,30 @@ public class Artist {
 		glLoadIdentity();
 	}
 	
-	public static Texture LoadTexture(String path, String fileType){
+	private static Texture LoadTexture(String path, String fileType){
 		
 		Texture tex = null;
 		InputStream in = ResourceLoader.getResourceAsStream(path);
 		try{
+	//		System.out.println(path);
 			tex = TextureLoader.getTexture(fileType, in );
-		} catch (IOException e){
-			System.out.println("LoadTexture error");
-			e.printStackTrace();
+		} catch (Throwable e){
+			System.out.println("LoadTexture error of image " + path);
+			
+			//e.printStackTrace();
 		}
 		return tex;
 	}
 	
 	public static Texture QuickLoad(String name){
-		Texture tex = null;
+		Texture tex = cachedTextures.get(name);
+		
+		if(tex != null ){
+			return tex;
+		}
+		
 		tex = LoadTexture("./res/" + name + ".png" , "PNG");
+		cachedTextures.put(name, tex);
 		return tex;
 	}
 }
